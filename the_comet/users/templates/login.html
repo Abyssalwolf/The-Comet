@@ -1,4 +1,5 @@
-<!-- users/templates/login.html -->
+{% load static %} 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +10,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom CSS for Gradient Background -->
     <style>
+        :root {
+            --color1: #ee7752;
+            --color2: #e73c7e;
+            --color3: #23a6d5;
+            --color4: #23d5ab;
+        }
+
         body {
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            position: relative; /* Required for absolute positioning of child elements */
+            background: linear-gradient(-45deg, var(--color1), var(--color2), var(--color3), var(--color4));
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             height: 100vh;
+            margin: 0; /* Remove default margin */
         }
+
         @keyframes gradient {
             0% {
                 background-position: 0% 50%;
@@ -26,9 +37,59 @@
                 background-position: 0% 50%;
             }
         }
+
+        /* Doodle Overlay */
+        .doodle-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Ensure it's below the login div */
+            pointer-events: none; /* Allow clicks to pass through */
+            background-image: url("{% static 'wadoodles.png' %}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.5;
+        }
+
+        /* Login Form Container */
+        .login-container {
+            position: relative;
+            z-index: 2; /* Ensure it's above the doodle overlay */
+            background-color: white; /* Explicitly set background color */
+        }
     </style>
+    <script>
+        // Predefined color set
+        const colors = [
+            '#ee7752', '#e73c7e', '#23a6d5', '#23d5ab',
+            '#ff9a9e', '#fad0c4', '#fbc2eb', '#a6c1ee',
+            '#f6d365', '#fda085', '#fbc2eb', '#a6c1ee'
+        ];
+
+        // Function to generate random colors
+        function getRandomColors() {
+            const randomColors = [];
+            for (let i = 0; i < 4; i++) {
+                const randomIndex = Math.floor(Math.random() * colors.length);
+                randomColors.push(colors[randomIndex]);
+            }
+            return randomColors;
+        }
+
+        // Set random colors as CSS variables
+        const [color1, color2, color3, color4] = getRandomColors();
+        document.documentElement.style.setProperty('--color1', color1);
+        document.documentElement.style.setProperty('--color2', color2);
+        document.documentElement.style.setProperty('--color3', color3);
+        document.documentElement.style.setProperty('--color4', color4);
+    </script>
 </head>
 <body class="flex items-center justify-center h-screen">
+
+    <div class="doodle-overlay"></div>
 
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
         <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
@@ -39,13 +100,13 @@
             <!-- Email Field -->
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" id="email" name="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="you@example.com" required>
+                <input type="email" id="email" name="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
             </div>
 
             <!-- Password Field -->
             <div>
                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" id="password" name="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="********" required>
+                <input type="password" id="password" name="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
             </div>
 
             <!-- Submit Button -->
