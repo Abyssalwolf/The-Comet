@@ -1,10 +1,9 @@
-<!-- users/templates/login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Register Page</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom CSS for Gradient Background -->
@@ -31,10 +30,16 @@
 <body class="flex items-center justify-center h-screen">
 
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
-        <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center">Register</h2>
 
-        <form action="{% url 'login' %}" method="post" class="space-y-4">
+        <form action="{% url 'register' %}" method="post" class="space-y-4">
             {% csrf_token %}
+
+            <!-- Username Field -->
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="username" name="username" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter your username" required>
+            </div>
 
             <!-- Email Field -->
             <div>
@@ -48,10 +53,16 @@
                 <input type="password" id="password" name="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="********" required>
             </div>
 
+            <!-- Confirm Password Field -->
+            <div>
+                <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="********" required>
+            </div>
+
             <!-- Submit Button -->
             <div>
                 <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Login
+                    Register
                 </button>
             </div>
         </form>
@@ -61,20 +72,20 @@
             <!-- Google Login Button -->
             <button class="px-3 py-1.5 border flex items-center gap-2 border-slate-200 dark:border-slate-700 rounded-md text-sm text-black dark:text-black hover:border-slate-400 dark:hover:border-slate-500 hover:text-black dark:hover:text-black hover:shadow transition duration-150">
                 <img class="w-5 h-5" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo">
-                <span class="text-sm">Login with Google</span>
+                <span class="text-sm">Signup with Google</span>
             </button>
             
 
             <!-- GitHub Login Button -->
             <button class="ml-2 px-3 py-1.5 border flex items-center gap-2 border-slate-200 dark:border-slate-700 rounded-md text-sm text-black dark:text-black hover:border-slate-400 dark:hover:border-slate-500 hover:text-black dark:hover:text-black hover:shadow transition duration-150">
                 <img class="w-5 h-5" src="https://www.svgrepo.com/show/512317/github-142.svg" loading="lazy" alt="github logo">
-                <span class="text-sm">Login with GitHub</span>
+                <span class="text-sm">Signup with GitHub</span>
             </button>
         </div>
 
-        <!-- Link to Register Page -->
+        <!-- Link to Login Page -->
         <div class="mt-4 text-center">
-            <a href="{% url 'register' %}" class="text-sm text-indigo-600 hover:text-indigo-500">Don't have an account? Register here</a>
+            <a href="{% url 'login' %}" class="text-sm text-indigo-600 hover:text-indigo-500">Already have an account? Login here</a>
         </div>
     </div>
 
