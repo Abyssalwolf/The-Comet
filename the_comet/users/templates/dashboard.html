@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to your Dashboard, {{ user.org_name }}!</h1>
+    <p>Email: {{ user.email }}</p>
+    <a href="{% url 'logout' %}" class="text-sm text-indigo-600 hover:text-indigo-500">Logout</a>
+</body>
+</html>
