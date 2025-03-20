@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { display: flex; flex-wrap: wrap; gap: 20px; }
+        .card { padding: 20px; border-radius: 10px; background: #f5f5f5; width: 300px; }
+        .button { display: block; padding: 10px; text-align: center; background: blue; color: white; text-decoration: none; border-radius: 5px; margin-top: 10px; }
+        .logout { background: red; }
+    </style>
 </head>
 <body>
-    <h1>Welcome to your Dashboard, {{ user.org_name }}!</h1>
+    <h1>Welcome to Your Dashboard {{ user.org_name }}!</h1>
     <p>Email: {{ user.email }}</p>
-    <a href="{% url 'logout' %}" class="text-sm text-indigo-600 hover:text-indigo-500">Logout</a>
+    
+    <a href="{% url 'logout' %}" class="button logout">Logout</a>
+
+    <div class="container">
+        <!-- Add New Event Section -->
+        <div class="card">
+            <h2>Add New Event</h2>
+            <p>Create a new event and start managing registrations.</p>
+            <a href="#" class="button">Add Event</a>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="card">
+            <h2>Your Profile</h2>
+            <p>Name: <strong>John Doe</strong></p>
+            <p>Email: <strong>johndoe@example.com</strong></p>
+            <a href="#" class="button">Edit Profile</a>
+        </div>
+
+        <!-- Queries Section -->
+        <div class="card">
+            <h2>Received Queries</h2>
+            <p>Queries from users will be shown here.</p>
+            <a href="#" class="button">View Queries</a>
+        </div>
+
+        <!-- Active Events Section -->
+        <div class="card">
+            <h2>Active Events</h2>
+            <p>Showing currently active events and stats:</p>
+            <ul>
+                <li>Event 1: <strong>100 registered</strong>, <strong>500 page views</strong></li>
+                <li>Event 2: <strong>50 registered</strong>, <strong>300 page views</strong></li>
+            </ul>
+            <a href="#" class="button">Manage Events</a>
+        </div>
+    </div>
 </body>
 </html>

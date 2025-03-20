@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class CustomUserManager(BaseUserManager):
@@ -31,3 +32,38 @@ class CustomerProfile(models.Model):
 
     def __str__(self):
         return f"Profile of {self.user.email}"
+
+class Event(models.Model):
+    eventid = models.AutoField(primary_key=True)
+    email = models.EmailField()
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+
+    collaborator_email_1 = models.EmailField(blank=True, null=True)
+    collaborator_email_2 = models.EmailField(blank=True, null=True)
+
+    venue = models.CharField(max_length=255)  
+    location = models.CharField(max_length=255)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
+
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+    registration_fee = models.TextField(blank=True, null=True)
+
+    sponsor_1_title = models.CharField(max_length=255, blank=True, null=True)
+    sponsor_1_name = models.CharField(max_length=255, blank=True, null=True)
+    sponsor_1_image = models.ImageField(upload_to='sponsor_images/', blank=True, null=True)
+
+    sponsor_2_title = models.CharField(max_length=255, blank=True, null=True)
+    sponsor_2_name = models.CharField(max_length=255, blank=True, null=True)
+    sponsor_2_image = models.ImageField(upload_to='sponsor_images/', blank=True, null=True)
+
+    sponsor_3_title = models.CharField(max_length=255, blank=True, null=True)
+    sponsor_3_name = models.CharField(max_length=255, blank=True, null=True)
+    sponsor_3_image = models.ImageField(upload_to='sponsor_images/', blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.title} - {self.date}"
